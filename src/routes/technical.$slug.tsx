@@ -54,7 +54,7 @@ function TechPost() {
             {post.title}
           </h1>
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((t) => (
+            {post.tags.map((t: string) => (
               <span key={t} className="px-3 py-1 bg-surface border border-border-subtle rounded-sm font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 #{t}
               </span>
