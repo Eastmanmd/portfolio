@@ -1,0 +1,67 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build (static, prerendered)
+        env:
+          GITHUB_PAGES: "1"
+          # Serve under https://<user>.github.io/<repo>/ — adjust if using a custom domain or
+          # a <user>.github.io repo (in which case set PAGES_BASE: "/").
+          PAGES_BASE: "/${{ github.event.repository.name }}/"
+          NITRO_PRESET: github_pages
+        run: bun run build
+
+      - name: SPA fallback (copy index.html -> 404.html)
+        run: |
+          OUT_DIR=""
+          for d in dist .output/public dist/client .vercel/output/static; do
+            if [ -f "$d/index.html" ]; then OUT_DIR="$d"; break; fi
+          done
+          if [ -z "$OUT_DIR" ]; then
+            echo "Could not find build output with index.html" >&2
+            ls -la dist .output/public 2>/dev/null || true
+            exit 1
+          fi
+          echo "Using output dir: $OUT_DIR"
+          cp "$OUT_DIR/index.html" "$OUT_DIR/404.html"
+          touch "$OUT_DIR/.nojekyll"
+          echo "BUILD_OUT=$OUT_DIR" >> $GITHUB_ENV
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.BUILD_OUT }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
