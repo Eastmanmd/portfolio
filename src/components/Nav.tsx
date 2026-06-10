@@ -10,7 +10,7 @@ export function Nav() {
         <Link to="/" className="flex items-center gap-2 group">
           <div className="size-2.5 rounded-full bg-brand animate-pulse" />
           <span className="font-mono text-sm tracking-tighter uppercase font-medium">
-            Alex.Bio<span className="text-muted-foreground">/Seq</span>
+            Ali.Oku<span className="text-muted-foreground">/Bio</span>
           </span>
         </Link>
         <div className="flex items-center gap-6 text-xs font-mono uppercase tracking-widest text-muted-foreground">

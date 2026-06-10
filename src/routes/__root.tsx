@@ -78,11 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Alex Chen — Bioinformatician" },
-      { name: "description", content: "Portfolio, technical notes, and field notes from a bioinformatician working on single-cell genomics and NGS pipelines." },
-      { name: "author", content: "Alex Chen" },
-      { property: "og:title", content: "Alex Chen — Bioinformatician" },
-      { property: "og:description", content: "Portfolio, technical notes, and field notes from a bioinformatician." },
+      { title: "Ali Oku — Bioinformatics & Computational Biology" },
+      { name: "description", content: "Bioinformatics Analyst at the New York Genome Center. Portfolio, technical writing, and field notes on single-cell genomics, multi-omics, and ML." },
+      { name: "author", content: "Ali Oku" },
+      { property: "og:title", content: "Ali Oku — Bioinformatics & Computational Biology" },
+      { property: "og:description", content: "Bioinformatics Analyst at the New York Genome Center. Single-cell genomics, multi-omics, and ML for translational research." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -104,12 +104,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <HeadContent />
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.classList.remove('dark');else document.documentElement.classList.add('dark');}catch(e){}`,
+            __html: `try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');}catch(e){}`,
           }}
         />
       </head>

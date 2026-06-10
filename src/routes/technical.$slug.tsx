@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { techPosts } from "@/lib/posts";
+import { formatDateLong } from "@/lib/date";
 import { Markdown } from "@/components/Markdown";
 import { ArrowLeft } from "lucide-react";
 
@@ -46,7 +47,7 @@ function TechPost() {
 
         <header className="mb-12 pb-12 border-b border-border-subtle">
           <div className="flex flex-wrap gap-3 mb-6 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            <time>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+            <time>{formatDateLong(post.date)}</time>
             <span>·</span>
             <span>{post.readingTime} min read</span>
           </div>
