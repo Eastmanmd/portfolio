@@ -24,6 +24,10 @@ export default defineConfig({
         enabled: true,
         crawlLinks: true,
         autoSubfolderIndex: true,
+        filter: ({ path }) => {
+          // Exclude static assets (like PDF files) and Lovable system assets from being crawled
+          return !path.endsWith(".pdf") && !path.startsWith("/__l5e");
+        },
         routes: [
           "/",
           "/technical",
