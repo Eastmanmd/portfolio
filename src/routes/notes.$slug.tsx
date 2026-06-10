@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { notePosts } from "@/lib/posts";
+import { formatDateLong } from "@/lib/date";
 import { Markdown } from "@/components/Markdown";
 import { ArrowLeft } from "lucide-react";
 
@@ -47,7 +48,7 @@ function NotePost() {
 
         <header className="mb-12">
           <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-6">
-            {post.category} · <time>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+            {post.category} · <time>{formatDateLong(post.date)}</time>
           </p>
           <h1 className="text-3xl md:text-5xl font-normal tracking-tight leading-[1.15] text-balance mb-8" style={{ fontFamily: "'Lora', serif" }}>
             {post.title}

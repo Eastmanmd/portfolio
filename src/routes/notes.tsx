@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { notePosts } from "@/lib/posts";
+import { formatMonthYear } from "@/lib/date";
 
 export const Route = createFileRoute("/notes")({
   head: () => ({
@@ -49,7 +50,7 @@ function NotesIndex() {
                 />
               </div>
               <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                {p.category} · {new Date(p.date).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                {p.category} · {formatMonthYear(p.date)}
               </p>
               <h2 className="text-xl leading-snug group-hover:text-brand transition-colors text-pretty" style={{ fontFamily: "'Lora', serif" }}>
                 {p.title}
