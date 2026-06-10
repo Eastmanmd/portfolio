@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { techPosts } from "@/lib/posts";
+import { formatDateShort } from "@/lib/date";
 import { Search, Pin } from "lucide-react";
 
 export const Route = createFileRoute("/technical")({
@@ -115,7 +116,7 @@ function PostRow({ post, pinned }: { post: (typeof techPosts)[number]; pinned?: 
       <article className="grid grid-cols-1 md:grid-cols-12 gap-6">
         <div className="md:col-span-3">
           <time className="text-xs font-mono text-muted-foreground block">
-            {new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }).toUpperCase()}
+            {formatDateShort(post.date)}
           </time>
           <p className="text-xs font-mono text-muted-foreground mt-1">{post.readingTime} min read</p>
           {pinned && (
