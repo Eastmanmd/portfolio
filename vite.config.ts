@@ -1,45 +1,14 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - tanstackStart, viteReact, tailwindcss, tsConfigPaths, nitro (build-only using cloudflare as a default target),
-//     componentTagger (dev-only), VITE_* env injection, @ path alias, React/TanStack dedupe,
-//     error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
-
-// GitHub Pages static export mode.
-// Enabled by setting GITHUB_PAGES=1 in CI (see .github/workflows/deploy.yml).
-// Lovable's own preview/publish builds leave this unset and use the default Cloudflare target.
-const isPages = process.env.GITHUB_PAGES === "1";
-const pagesBase = process.env.PAGES_BASE || "/";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
 
 export default defineConfig({
-  vite: isPages ? { base: pagesBase } : {},
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
-    ...(isPages && {
-      // Prerender every page route to static HTML for GitHub Pages.
-      prerender: {
-        enabled: true,
-        crawlLinks: true,
-        autoSubfolderIndex: true,
-        filter: ({ path }) => {
-          // Exclude static assets (like PDF files) and Lovable system assets from being crawled
-          return !path.endsWith(".pdf") && !path.startsWith("/__l5e");
-        },
-        routes: [
-          "/",
-          "/technical",
-          "/technical/scrnaseq-seurat-v5-pipeline",
-          "/technical/nextflow-aws-batch-spot",
-          "/technical/bayesian-normalization-sparse",
-          "/notes",
-          "/notes/espresso-extraction",
-          "/notes/cascades-solitude",
-          "/notes/reading-list-winter",
-        ],
-      },
-    }),
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
+  base: "./", // Use relative paths to make static hosting work anywhere (including subfolders on GitHub Pages)
 });

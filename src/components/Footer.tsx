@@ -6,9 +6,28 @@ export function Footer() {
           &copy; {new Date().getFullYear()} ALI OKU // BIOINFORMATICS &amp; COMPUTATIONAL BIOLOGY
         </p>
         <div className="flex gap-6">
-          <a href="https://www.linkedin.com/in/ali-eastman-oku/" target="_blank" rel="noreferrer" className="text-xs font-mono text-muted-foreground hover:text-brand transition-colors">LINKEDIN</a>
-          <a href="https://scholar.google.com/scholar?q=Ali+Oku" target="_blank" rel="noreferrer" className="text-xs font-mono text-muted-foreground hover:text-brand transition-colors">SCHOLAR</a>
-          <a href="mailto:ali.eastman.oku@gmail.com" className="text-xs font-mono text-muted-foreground hover:text-brand transition-colors">EMAIL</a>
+          <a
+            href="https://www.linkedin.com/in/ali-eastman-oku/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs font-mono text-muted-foreground hover:text-brand transition-colors"
+          >
+            LINKEDIN
+          </a>
+          <a
+            href="https://scholar.google.com/scholar?q=Ali+Oku"
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs font-mono text-muted-foreground hover:text-brand transition-colors"
+          >
+            SCHOLAR
+          </a>
+          <a
+            href="mailto:ali.eastman.oku@gmail.com"
+            className="text-xs font-mono text-muted-foreground hover:text-brand transition-colors"
+          >
+            EMAIL
+          </a>
         </div>
       </div>
     </footer>

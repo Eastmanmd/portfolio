@@ -168,7 +168,8 @@ export const notePosts: NotePost[] = [
     title: "The chemistry of the perfect espresso extraction",
     date: "2024-04-02",
     category: "Curiosities",
-    excerpt: "Applying laboratory precision to my morning caffeine routine. It's all about total dissolved solids.",
+    excerpt:
+      "Applying laboratory precision to my morning caffeine routine. It's all about total dissolved solids.",
     image: notesCoffee,
     content: `There is a strange comfort in discovering that the ritual you perform half-asleep every morning is, in fact, a controlled chemistry experiment.
 
@@ -181,7 +182,8 @@ I bought a refractometer last month. My partner thinks I have lost the plot. My 
     title: "Solitude and the Cascades",
     date: "2024-03-18",
     category: "Field notes",
-    excerpt: "Three days of hiking without a screen. Why bioinformaticians need to stare at trees more often.",
+    excerpt:
+      "Three days of hiking without a screen. Why bioinformaticians need to stare at trees more often.",
     image: notesCascades,
     content: `Three days in the North Cascades, no phone, no laptop, no JIRA tickets. By the second afternoon my brain stopped trying to optimize the route and started just walking it.
 

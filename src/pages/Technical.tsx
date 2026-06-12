@@ -1,31 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { techPosts } from "@/lib/posts";
 import { formatDateShort } from "@/lib/date";
 import { Search, Pin } from "lucide-react";
 
-export const Route = createFileRoute("/technical")({
-  head: () => ({
-    meta: [
-      { title: "Technical — Alex Chen" },
-      { name: "description", content: "Technical writing on bioinformatics: scRNA-seq, NGS pipelines, statistics, and tools." },
-      { property: "og:title", content: "Technical — Alex Chen" },
-      { property: "og:description", content: "Technical writing on bioinformatics: scRNA-seq, NGS pipelines, statistics, and tools." },
-    ],
-  }),
-  component: TechnicalIndex,
-});
-
-function TechnicalIndex() {
+export default function Technical() {
   const [query, setQuery] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
-  const allTags = useMemo(
-    () => Array.from(new Set(techPosts.flatMap((p) => p.tags))).sort(),
-    []
-  );
+  const allTags = useMemo(() => Array.from(new Set(techPosts.flatMap((p) => p.tags))).sort(), []);
 
   const filtered = useMemo(() => {
     return techPosts.filter((p) => {
@@ -46,10 +31,15 @@ function TechnicalIndex() {
       <Nav />
       <main className="max-w-5xl mx-auto px-6 py-20">
         <header className="mb-16">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand mb-4">01 // Technical Documentation</p>
-          <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-6">Technical writing &amp; tool reviews.</h1>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand mb-4">
+            01 // Technical Documentation
+          </p>
+          <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-6">
+            Technical writing &amp; tool reviews.
+          </h1>
           <p className="text-lg text-muted-foreground max-w-2xl text-pretty">
-            Process notes, pipeline patterns, and reviews of bioinformatics tools — mostly things I wished someone had written down before I had to figure them out.
+            Process notes, pipeline patterns, and reviews of bioinformatics tools — mostly things I
+            wished someone had written down before I had to figure them out.
           </p>
         </header>
 
@@ -69,7 +59,9 @@ function TechnicalIndex() {
             <button
               onClick={() => setActiveTag(null)}
               className={`px-3 py-1.5 font-mono text-xs uppercase tracking-widest border rounded-sm transition-colors ${
-                !activeTag ? "border-brand text-brand" : "border-border-subtle text-muted-foreground hover:border-brand hover:text-brand"
+                !activeTag
+                  ? "border-brand text-brand"
+                  : "border-border-subtle text-muted-foreground hover:border-brand hover:text-brand"
               }`}
             >
               All
@@ -79,7 +71,9 @@ function TechnicalIndex() {
                 key={t}
                 onClick={() => setActiveTag(t === activeTag ? null : t)}
                 className={`px-3 py-1.5 font-mono text-xs uppercase tracking-widest border rounded-sm transition-colors ${
-                  activeTag === t ? "border-brand text-brand" : "border-border-subtle text-muted-foreground hover:border-brand hover:text-brand"
+                  activeTag === t
+                    ? "border-brand text-brand"
+                    : "border-border-subtle text-muted-foreground hover:border-brand hover:text-brand"
                 }`}
               >
                 #{t}
@@ -97,7 +91,9 @@ function TechnicalIndex() {
             <PostRow key={p.slug} post={p} />
           ))}
           {filtered.length === 0 && (
-            <p className="py-12 text-center text-muted-foreground font-mono text-sm">No posts match those filters.</p>
+            <p className="py-12 text-center text-muted-foreground font-mono text-sm">
+              No posts match those filters.
+            </p>
           )}
         </div>
       </main>
@@ -108,17 +104,15 @@ function TechnicalIndex() {
 
 function PostRow({ post, pinned }: { post: (typeof techPosts)[number]; pinned?: boolean }) {
   return (
-    <Link
-      to="/technical/$slug"
-      params={{ slug: post.slug }}
-      className="block py-8 group"
-    >
+    <Link to={`/technical/${post.slug}`} className="block py-8 group">
       <article className="grid grid-cols-1 md:grid-cols-12 gap-6">
         <div className="md:col-span-3">
           <time className="text-xs font-mono text-muted-foreground block">
             {formatDateShort(post.date)}
           </time>
-          <p className="text-xs font-mono text-muted-foreground mt-1">{post.readingTime} min read</p>
+          <p className="text-xs font-mono text-muted-foreground mt-1">
+            {post.readingTime} min read
+          </p>
           {pinned && (
             <p className="mt-3 inline-flex items-center gap-1 text-xs font-mono text-brand">
               <Pin className="size-3" /> Pinned
@@ -132,7 +126,12 @@ function PostRow({ post, pinned }: { post: (typeof techPosts)[number]; pinned?: 
           <p className="mt-3 text-muted-foreground leading-relaxed text-pretty">{post.excerpt}</p>
           <div className="flex flex-wrap gap-3 mt-4">
             {post.tags.map((t) => (
-              <span key={t} className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">#{t}</span>
+              <span
+                key={t}
+                className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+              >
+                #{t}
+              </span>
             ))}
           </div>
         </div>

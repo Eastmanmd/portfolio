@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import { useTheme } from "@/lib/theme";
 import { Moon, Sun } from "lucide-react";
 
@@ -14,28 +14,31 @@ export function Nav() {
           </span>
         </Link>
         <div className="flex items-center gap-6 text-xs font-mono uppercase tracking-widest text-muted-foreground">
-          <Link
+          <NavLink
             to="/"
-            activeOptions={{ exact: true }}
-            activeProps={{ className: "text-foreground" }}
-            className="hover:text-brand transition-colors hidden sm:block"
+            end
+            className={({ isActive }) =>
+              `hover:text-brand transition-colors hidden sm:block ${isActive ? "text-foreground" : ""}`
+            }
           >
             Portfolio
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/technical"
-            activeProps={{ className: "text-foreground" }}
-            className="hover:text-brand transition-colors"
+            className={({ isActive }) =>
+              `hover:text-brand transition-colors ${isActive ? "text-foreground" : ""}`
+            }
           >
             Technical
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/notes"
-            activeProps={{ className: "text-foreground" }}
-            className="hover:text-brand transition-colors"
+            className={({ isActive }) =>
+              `hover:text-brand transition-colors ${isActive ? "text-foreground" : ""}`
+            }
           >
             Notes
-          </Link>
+          </NavLink>
           <div className="w-px h-4 bg-border self-center hidden sm:block" />
           <button
             onClick={toggle}

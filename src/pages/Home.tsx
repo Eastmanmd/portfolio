@@ -1,28 +1,32 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { techPosts } from "@/lib/posts";
 import { formatDateShort } from "@/lib/date";
 import profileImg from "@/assets/profile.jpg";
-import cvAsset from "@/assets/Ali_Oku_CV.pdf.asset.json";
 import { ArrowUpRight, Mail, Download } from "lucide-react";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Ali Oku — Bioinformatics & Computational Biology" },
-      { name: "description", content: "Bioinformatics Analyst at the New York Genome Center working on single-cell genomics, multi-omics integration, and machine learning for cancer research." },
-      { property: "og:title", content: "Ali Oku — Bioinformatics & Computational Biology" },
-      { property: "og:description", content: "Bioinformatics Analyst at the New York Genome Center — single-cell genomics, multi-omics, and ML for cancer research." },
-    ],
-  }),
-  component: Index,
-});
 
 const skills = {
   Languages: ["R", "Python", "SQL", "Java", "Swift", "Bash", "HTML/CSS", "Git"],
-  "Single-cell & Multi-omics": ["scRNA-seq", "ATAC-seq", "Spatial transcriptomics", "CITE-seq", "Bulk RNA-seq", "WGCNA"],
-  "ML & Foundation Models": ["scVI", "Geneformer", "scGPT", "cell2sentence", "XGBoost", "Random Forest", "SVM", "VAE / MMD", "PCA / kNN"],
+  "Single-cell & Multi-omics": [
+    "scRNA-seq",
+    "ATAC-seq",
+    "Spatial transcriptomics",
+    "CITE-seq",
+    "Bulk RNA-seq",
+    "WGCNA",
+  ],
+  "ML & Foundation Models": [
+    "scVI",
+    "Geneformer",
+    "scGPT",
+    "cell2sentence",
+    "XGBoost",
+    "Random Forest",
+    "SVM",
+    "VAE / MMD",
+    "PCA / kNN",
+  ],
   "Pipelines & Infra": ["HPC clusters", "Cloud (AWS)", "Reproducible workflows", "QC frameworks"],
   Applications: ["R Shiny", "D3.js", "iOS (Swift)"],
 };
@@ -66,9 +70,17 @@ const experience = [
 ];
 
 const education = [
-  { period: "2023", degree: "M.Sc. Biological Sciences & Bioinformatics", school: "Northern Illinois University" },
+  {
+    period: "2023",
+    degree: "M.Sc. Biological Sciences & Bioinformatics",
+    school: "Northern Illinois University",
+  },
   { period: "2022", degree: "M.Sc. Computer Science", school: "Northern Illinois University" },
-  { period: "2017", degree: "B.Sc. Biological & Biomedical Sciences", school: "Minnesota State University, Mankato" },
+  {
+    period: "2017",
+    degree: "B.Sc. Biological & Biomedical Sciences",
+    school: "Minnesota State University, Mankato",
+  },
 ];
 
 const publications = [
@@ -83,30 +95,35 @@ const publications = [
     role: "First author",
   },
   {
-    title: "A complex phylogeny of lineage plasticity in metastatic castration-resistant prostate cancer",
+    title:
+      "A complex phylogeny of lineage plasticity in metastatic castration-resistant prostate cancer",
     venue: "npj Precision Oncology 9, 91 (2025)",
     role: "Co-author",
     href: "https://doi.org/10.1038/s41698-025-00854-4",
   },
   {
-    title: "Comprehensive Molecular Characterization of High-Grade Endometrial Cancer in an Ancestrally Diverse Cohort",
+    title:
+      "Comprehensive Molecular Characterization of High-Grade Endometrial Cancer in an Ancestrally Diverse Cohort",
     venue: "American Association for Cancer Research, 2025",
     role: "Co-author",
   },
   {
-    title: "Polyethnic-1000: Advancing cancer genomics in ethnically diverse, underserved patient populations in New York",
+    title:
+      "Polyethnic-1000: Advancing cancer genomics in ethnically diverse, underserved patient populations in New York",
     venue: "American Association for Cancer Research, 2024",
     role: "Co-author",
   },
   {
-    title: "The Role of Machine Learning and Network Analyses in Understanding Microbial Composition in an Experimental Prairie",
+    title:
+      "The Role of Machine Learning and Network Analyses in Understanding Microbial Composition in an Experimental Prairie",
     venue: "M.Sc. Thesis, Northern Illinois University, 2023",
     role: "Author",
   },
 ];
 
-function Index() {
+export default function Home() {
   const featured = techPosts.find((p) => p.pinned) ?? techPosts[0];
+  const cvUrl = `${import.meta.env.BASE_URL}Ali_Oku_CV.pdf`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -121,14 +138,18 @@ function Index() {
                 Ali Oku · Bioinformatics Analyst · New York
               </p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-8 leading-[1.1] text-balance">
-                Building computational tools at the edge of <span className="text-brand italic">single-cell</span> biology and machine learning.
+                Building computational tools at the edge of{" "}
+                <span className="text-brand italic">single-cell</span> biology and machine learning.
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl text-pretty">
-                Bioinformatics Analyst in Computational Biology at the New York Genome Center. I build scalable NGS pipelines and benchmark foundation-model methods (scVI, Geneformer, scGPT) for single-cell analysis across cancer, neurodegenerative, and autoimmune disease projects.
+                Bioinformatics Analyst in Computational Biology at the New York Genome Center. I
+                build scalable NGS pipelines and benchmark foundation-model methods (scVI,
+                Geneformer, scGPT) for single-cell analysis across cancer, neurodegenerative, and
+                autoimmune disease projects.
               </p>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href={cvAsset.url}
+                  href={cvUrl}
                   download="Ali_Oku_CV.pdf"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-brand text-brand-foreground rounded-sm font-mono text-xs uppercase tracking-widest hover:opacity-90 transition-opacity"
                 >
@@ -157,7 +178,9 @@ function Index() {
         {/* Experience */}
         <section className="mb-32">
           <div className="flex items-baseline justify-between mb-12 border-b border-border pb-4">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">01 // Experience</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">
+              01 // Experience
+            </h2>
             <span className="text-xs font-mono text-muted-foreground">curriculum vitae</span>
           </div>
           <div className="space-y-10">
@@ -169,7 +192,9 @@ function Index() {
                 <div className="md:col-span-8">
                   <h3 className="text-xl font-medium">{e.role}</h3>
                   <p className="text-sm text-brand font-mono mt-1">{e.org}</p>
-                  <p className="text-muted-foreground mt-3 leading-relaxed text-pretty">{e.detail}</p>
+                  <p className="text-muted-foreground mt-3 leading-relaxed text-pretty">
+                    {e.detail}
+                  </p>
                 </div>
               </div>
             ))}
@@ -179,7 +204,9 @@ function Index() {
         {/* Education */}
         <section className="mb-32">
           <div className="flex items-baseline justify-between mb-12 border-b border-border pb-4">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">02 // Education</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">
+              02 // Education
+            </h2>
           </div>
           <div className="space-y-6">
             {education.map((e) => (
@@ -197,12 +224,16 @@ function Index() {
         {/* Skills */}
         <section className="mb-32">
           <div className="flex items-baseline justify-between mb-12 border-b border-border pb-4">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">03 // Technical Stack</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">
+              03 // Technical Stack
+            </h2>
           </div>
           <div className="space-y-8">
             {Object.entries(skills).map(([cat, items]) => (
               <div key={cat} className="grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline">
-                <p className="md:col-span-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">{cat}</p>
+                <p className="md:col-span-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                  {cat}
+                </p>
                 <div className="md:col-span-8 flex flex-wrap gap-2">
                   {items.map((s) => (
                     <span
@@ -221,15 +252,26 @@ function Index() {
         {/* Publications */}
         <section className="mb-32">
           <div className="flex items-baseline justify-between mb-12 border-b border-border pb-4">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">04 // Selected Publications</h2>
-            <a href="https://scholar.google.com/scholar?q=Ali+Oku" target="_blank" rel="noreferrer" className="text-xs font-mono text-muted-foreground hover:text-foreground">Google Scholar →</a>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">
+              04 // Selected Publications
+            </h2>
+            <a
+              href="https://scholar.google.com/scholar?q=Ali+Oku"
+              target="_blank"
+              rel="noreferrer"
+              className="text-xs font-mono text-muted-foreground hover:text-foreground"
+            >
+              Google Scholar →
+            </a>
           </div>
           <div className="divide-y divide-border-subtle">
             {publications.map((p) => (
               <div key={p.title} className="py-6 grid grid-cols-1 md:grid-cols-12 gap-4 first:pt-0">
                 <div className="md:col-span-9">
                   <h3 className="font-medium leading-snug text-pretty">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{p.venue} · {p.role}</p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {p.venue} · {p.role}
+                  </p>
                 </div>
                 <div className="md:col-span-3 md:text-right">
                   {p.href && (
@@ -251,14 +293,17 @@ function Index() {
         {/* Featured tech post */}
         <section className="mb-32">
           <div className="flex items-baseline justify-between mb-12 border-b border-border pb-4">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">05 // Latest Writing</h2>
-            <Link to="/technical" className="text-xs font-mono text-muted-foreground hover:text-foreground">All posts →</Link>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">
+              05 // Latest Writing
+            </h2>
+            <Link
+              to="/technical"
+              className="text-xs font-mono text-muted-foreground hover:text-foreground"
+            >
+              All posts →
+            </Link>
           </div>
-          <Link
-            to="/technical/$slug"
-            params={{ slug: featured.slug }}
-            className="block group"
-          >
+          <Link to={`/technical/${featured.slug}`} className="block group">
             <article className="grid grid-cols-1 md:grid-cols-12 gap-8">
               <div className="md:col-span-4">
                 <time className="text-xs font-mono text-muted-foreground block mb-2">
@@ -269,13 +314,20 @@ function Index() {
                 </h3>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {featured.tags.map((t) => (
-                    <span key={t} className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">#{t}</span>
+                    <span
+                      key={t}
+                      className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+                    >
+                      #{t}
+                    </span>
                   ))}
                 </div>
               </div>
               <div className="md:col-span-8">
                 <div className="bg-surface/50 p-6 rounded-lg border border-border-subtle">
-                  <p className="text-muted-foreground leading-relaxed text-pretty">{featured.excerpt}</p>
+                  <p className="text-muted-foreground leading-relaxed text-pretty">
+                    {featured.excerpt}
+                  </p>
                   <p className="mt-4 text-xs font-mono text-brand">Read post →</p>
                 </div>
               </div>
@@ -286,28 +338,50 @@ function Index() {
         {/* Contact */}
         <section>
           <div className="flex items-baseline justify-between mb-12 border-b border-border pb-4">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">06 // Contact</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-brand">
+              06 // Contact
+            </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-baseline">
-            <p className="md:col-span-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">Get in touch</p>
+            <p className="md:col-span-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Get in touch
+            </p>
             <div className="md:col-span-8">
               <p className="text-lg text-pretty mb-6">
-                Open to collaborations on single-cell methods, multi-omics integration, and ML for translational research.
+                Open to collaborations on single-cell methods, multi-omics integration, and ML for
+                translational research.
               </p>
               <p className="text-sm font-mono text-muted-foreground mb-6">
                 New York, NY · (507) 304-0984 · ali.eastman.oku@gmail.com
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="mailto:ali.eastman.oku@gmail.com" className="inline-flex items-center gap-2 px-4 py-2 bg-brand text-brand-foreground rounded-sm font-mono text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">
+                <a
+                  href="mailto:ali.eastman.oku@gmail.com"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-brand text-brand-foreground rounded-sm font-mono text-xs uppercase tracking-widest hover:opacity-90 transition-opacity"
+                >
                   <Mail className="size-3.5" /> Email
                 </a>
-                <a href={cvAsset.url} download="Ali_Oku_CV.pdf" className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-sm font-mono text-xs uppercase tracking-widest hover:border-brand hover:text-brand transition-colors">
+                <a
+                  href={cvUrl}
+                  download="Ali_Oku_CV.pdf"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-sm font-mono text-xs uppercase tracking-widest hover:border-brand hover:text-brand transition-colors"
+                >
                   <Download className="size-3.5" /> CV (PDF)
                 </a>
-                <a href="https://www.linkedin.com/in/ali-eastman-oku/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-sm font-mono text-xs uppercase tracking-widest hover:border-brand hover:text-brand transition-colors">
+                <a
+                  href="https://www.linkedin.com/in/ali-eastman-oku/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-sm font-mono text-xs uppercase tracking-widest hover:border-brand hover:text-brand transition-colors"
+                >
                   LinkedIn <ArrowUpRight className="size-3" />
                 </a>
-                <a href="https://scholar.google.com/scholar?q=Ali+Oku" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-sm font-mono text-xs uppercase tracking-widest hover:border-brand hover:text-brand transition-colors">
+                <a
+                  href="https://scholar.google.com/scholar?q=Ali+Oku"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-sm font-mono text-xs uppercase tracking-widest hover:border-brand hover:text-brand transition-colors"
+                >
                   Scholar <ArrowUpRight className="size-3" />
                 </a>
               </div>
